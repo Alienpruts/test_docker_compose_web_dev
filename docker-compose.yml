@@ -3,16 +3,16 @@ nginx:
     ports:
         - 8080:80
     links:
-        - php
+        - php_postgres
     volumes_from:
         - app
 
-php:
+php_postgres:
     build : ./php
     expose:
         - 9000
     links:
-        - mysql
+        - postgres
     volumes_from:
         - app
 
@@ -22,27 +22,18 @@ app:
         - ./www/html:/var/www/html
     command: "true"
 
-mysql:
-    image: mysql:latest
+postgres:
+    image: postgres:latest
     volumes_from:
-        - data
+        - data_postgres
     environment:
-        MYSQL_ROOT_PASSWORD : root
-        MYSQL_DATABASE : project
-        MYSQL_USER : project
-        MYSQL_PASSWORD : project
+        POSTGRES_PASSWORD : root
+        POSTGRES_DB : project
+        POSTGRES_USER : project
 
-data:
-    image: mysql:latest
+data_postgres:
+    image: postgres:latest
     volumes:
-        - /var/lib/mysql
+        - /var/lib/postgresql/data
     command: "true"
         
-phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-        - 8081:80
-    links:
-        - mysql
-    environment:
-        PMA_HOST : mysql

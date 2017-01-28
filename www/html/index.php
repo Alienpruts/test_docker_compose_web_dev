@@ -9,9 +9,10 @@
         <?php
 	try {
 
-        $database   = $user = $password = "project";
-        $host       = "mysql";
-        $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $user, $password);
+        $database   = $user = 'project';
+	$password   = 'root';
+        $host       = "postgres";
+        $connection = new PDO("pgsql:host={$host};dbname={$database};", $user, $password);
         $query      = $connection->query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_TYPE='BASE TABLE'");
         $tables     = $query->fetchAll(PDO::FETCH_COLUMN);
 
