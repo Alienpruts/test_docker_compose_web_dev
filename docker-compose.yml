@@ -3,11 +3,11 @@ nginx:
     ports:
         - 8080:80
     links:
-        - php
+        - php_5_6
     volumes_from:
         - app
 
-php:
+php_5_6:
     build : ./php
     expose:
         - 9000
