@@ -28,6 +28,7 @@
             }
             echo "</ul>";
         }
+	phpinfo();
         ?>
     </body>
 </html>
